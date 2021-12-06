@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :users
   resources :experiences
   post 'login', to: 'authentication#login'
+  get 'version', to: 'application#show_version'
 end

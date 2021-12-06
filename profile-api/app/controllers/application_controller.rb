@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authenticate
+  skip_before_action :authenticate, only: [:show_version]
 
   def authenticate
     if request.headers["Authorization"]
@@ -23,5 +24,15 @@ class ApplicationController < ActionController::API
 
   def create_token(payload)
     JWT.encode(payload, secret)
+  end
+
+  # GET /show_version/
+  def show_version
+    version_file = "app/assets/version.json"
+    unless File.exist?('app/assets/version.json')
+      version_file = "app/assets/version.template.json"
+    end
+
+    render json: JSON.pretty_generate(JSON.parse(File.read(version_file)))
   end
 end
