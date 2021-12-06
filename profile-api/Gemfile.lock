@@ -100,6 +100,8 @@ GEM
     ffi (1.15.4-x64-mingw32)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    health_check (3.1.0)
+      railties (>= 5.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -185,6 +187,7 @@ DEPENDENCIES
   byebug
   carrierwave (>= 2.0.0.rc, < 3.0)
   carrierwave-aws
+  health_check
   jwt
   mysql2 (~> 0.5)
   puma (~> 5.0)

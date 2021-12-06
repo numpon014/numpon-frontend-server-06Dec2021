@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  health_check_routes
+
   resources :users
   resources :experiences
   post 'login', to: 'authentication#login'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
