@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    logger.debug ENV["S3_SECRET_KEY"]
     @users = User.all
 
     render json: @users, :except => [:password_digest, :created_at, :updated_at]
@@ -12,7 +11,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user,
+           :include => { :experiences => { :except => [ :created_at, :updated_at ] } },
+           :except => [:password_digest, :created_at, :updated_at]
   end
 
   # POST /users
