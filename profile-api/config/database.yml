@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
-  database: profile_api_production
-  username: profile_api
-  password: <%= ENV['PROFILE_API_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

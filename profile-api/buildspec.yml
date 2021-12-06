@@ -13,7 +13,7 @@ env:
 phases:
   install:
     runtime-versions:
-      ruby: 3.0.3p157
+      ruby: latest
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
