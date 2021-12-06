@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
+    logger.debug ENV["S3_SECRET_KEY"]
     @users = User.all
 
     render json: @users, :except => [:password_digest, :created_at, :updated_at]
@@ -49,6 +50,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :password, :password_confirmation)
+      params.permit(:username, :password, :password_confirmation, :name, :avatar, :age)
     end
 end
