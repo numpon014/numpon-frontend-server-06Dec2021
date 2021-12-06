@@ -5,7 +5,7 @@ env:
     AWS_ACCOUNT_ID: "312726873549"
     IMAGE_NAME: "profileapp-server"
     TASKDEF_TEMPLATE_FILE: "taskdef.json"
-    FAMILY: "profileappserver"
+    FAMILY: "profileapp-server"
     CLUSTER: "profile-app"
     SERVICE_NAME: "profileapp-server"
     DESIRED_COUNT: "1"
