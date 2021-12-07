@@ -3,12 +3,15 @@ FROM ruby:3.0.3
 ENV RAILS_ENV=production
 ENV RACK_ENV=production
 
-RUN mkdir /profileapp
-WORKDIR /profileapp
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app/
 
-COPY Gemfile /profileapp/Gemfile
+COPY Gemfile /usr/src/app/
+COPY Gemfile.lock /usr/src/app/
+
 RUN bundle install
-COPY . /profileapp
+
+COPY . /usr/src/app/
 
 EXPOSE 3000
 

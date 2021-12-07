@@ -28,9 +28,9 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Generate version.json file
-      - sed -e "s;%DATE%;$(date);g" -e "s;%BUILD%;${CODEBUILD_BUILD_ID};g" -e "s;%REVISION%;${CODEBUILD_SOURCE_VERSION};g" profile-api/app/assets/version.template.json > profile-api/app/assets/version.json
+      - sed -e "s;%DATE%;$(date);g" -e "s;%BUILD%;${CODEBUILD_BUILD_ID};g" -e "s;%REVISION%;${CODEBUILD_SOURCE_VERSION};g" app/assets/version.template.json > app/assets/version.json
       - echo Building the Docker image...
-      - cd profile-api && docker build -t $REPOSITORY_URI:latest .
+      - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
@@ -46,4 +46,4 @@ phases:
       - aws ecs update-service --cluster $CLUSTER --region $AWS_DEFAULT_REGION --service $SERVICE_NAME --task-definition $FAMILY:$REVISION --desired-count $DESIRED_COUNT --force-new-deployment
       - echo Deploy completed on `date`
 artifacts:
-  files: profile-api/$TASKDEF_FILE
+  files: $TASKDEF_FILE
