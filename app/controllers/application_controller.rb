@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include Response
   before_action :authenticate
   skip_before_action :authenticate, only: [:show_version]
 
@@ -10,7 +11,7 @@ class ApplicationController < ActionController::API
         decode_token = JWT.decode(token, secret)
         user_id = decode_token.first["user_id"]
         @user = User.find(user_id)
-      rescue => exception
+      rescue StandardError => exception
         render json: { message: "Error #{exception}" }, status: :unauthorized
       end
     else

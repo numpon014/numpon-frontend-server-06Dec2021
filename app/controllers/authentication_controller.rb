@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AuthenticationController < ApplicationController
   skip_before_action :authenticate, only: [:login]
 
@@ -5,19 +6,19 @@ class AuthenticationController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user
       if @user.authenticate(params[:password])
-        payload = { user_id: @user.id}
+        payload = { user_id: @user.id }
         token = create_token(payload)
         time = Time.now + 24.hours.to_i
-        render json: {
-          username: @user.username,
-          token: token,
-          exp: time.strftime("%m-%d-%Y %H:%M"),
-        }
+        json_response({
+                        username: @user.username,
+                        token: token,
+                        exp: time.strftime('%m-%d-%Y %H:%M')
+                      })
       else
-        render json: { message: "Authentication Failed" }
+        json_response({ errors: { message: 'Authentication Failed' } }, :unauthorized)
       end
     else
-      render json: { message: "Authentication Failed" }
+      json_response({ errors: { message: 'Authentication Failed' } }, :unauthorized)
     end
   end
 
