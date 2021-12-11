@@ -10,6 +10,7 @@ class AuthenticationController < ApplicationController
         token = create_token(payload)
         time = Time.now + 24.hours.to_i
         json_response({
+                        id: @user.id,
                         username: @user.username,
                         token: token,
                         exp: time.strftime('%m-%d-%Y %H:%M')

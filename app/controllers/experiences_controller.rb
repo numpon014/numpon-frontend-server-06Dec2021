@@ -3,9 +3,15 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
-    @experience = Experience.all
+    @experiences = Experience.all
 
-    render json: @users, :except => [:password_digest, :created_at, :updated_at]
+    render json: @experiences, :except => [:password_digest, :created_at, :updated_at]
+  end
+
+  def find_by_user_id
+    @experiences = Experience.where(:user_id => params[:id])
+
+    render json: @experiences, :except => [:created_at, :updated_at, :user_id]
   end
 
   # GET /experiences/1
