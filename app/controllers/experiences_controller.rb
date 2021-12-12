@@ -9,7 +9,7 @@ class ExperiencesController < ApplicationController
   end
 
   def find_by_user_id
-    @experiences = Experience.where(:user_id => params[:id])
+    @experiences = Experience.where(:user_id => params[:id]).order(:start_date => :desc)
 
     render json: @experiences, :except => [:created_at, :updated_at, :user_id]
   end

@@ -23,7 +23,13 @@ class UsersController < ApplicationController
     if @user.save
       payload = { user_id: @user.id }
       token = create_token(payload)
-      render json: @user, status: :created, location: @user
+      time = Time.now + 24.hours.to_i
+      json_response({
+                      id: @user.id,
+                      username: @user.username,
+                      token: token,
+                      exp: time.strftime('%m-%d-%Y %H:%M')
+                    })
     else
       render json: @user.errors, status: :unprocessable_entity
     end
